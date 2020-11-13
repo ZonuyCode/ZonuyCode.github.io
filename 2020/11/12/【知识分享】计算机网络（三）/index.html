@@ -1,0 +1,317 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>【知识分享】计算机网络（三） | Zonuy</title><meta name="keywords" content="计算机网络"><meta name="author" content="Zonuy"><meta name="copyright" content="Zonuy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="网络层（NL）IP地址表示1、IPv4：32bit    分类IP ​      IPv6：128bit 2、点分十进制 ​    将32位地址每8位分为一组，再将其转换为十进制，并用“**.**”隔开  3、特殊IP地址 ​    ①主机号为全0，网络地址 ​    ②主机号为全1，广播地址 ​    ③网络号为全0，本地网络 ​    ④网络号为全1，回传地址（localhost） ​">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【知识分享】计算机网络（三）">
+<meta property="og:url" content="http://example.com/2020/11/12/%E3%80%90%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB%E3%80%91%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="Zonuy">
+<meta property="og:description" content="网络层（NL）IP地址表示1、IPv4：32bit    分类IP ​      IPv6：128bit 2、点分十进制 ​    将32位地址每8位分为一组，再将其转换为十进制，并用“**.**”隔开  3、特殊IP地址 ​    ①主机号为全0，网络地址 ​    ②主机号为全1，广播地址 ​    ③网络号为全0，本地网络 ​    ④网络号为全1，回传地址（localhost） ​">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/Internet-network.jpg">
+<meta property="article:published_time" content="2020-11-12T08:38:18.000Z">
+<meta property="article:modified_time" content="2020-11-13T10:08:17.942Z">
+<meta property="article:author" content="Zonuy">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/Internet-network.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2020/11/12/%E3%80%90%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB%E3%80%91%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%89%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.2.0',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-11-13 18:08:17'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {
+  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }
+})()</script><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Zonuy" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/img/beyouth.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">7</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">3</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div></div></div><div id="body-wrap"><div id="web_bg"></div><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%EF%BC%88NL%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">网络层（NL）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.1.</span> <span class="toc-text">IP地址表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80%E4%B8%8E%E7%A1%AC%E4%BB%B6%E5%9C%B0%E5%9D%80"><span class="toc-number">1.2.</span> <span class="toc-text">IP地址与硬件地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E8%A7%A3%E6%9E%90%E5%8D%8F%E8%AE%AEARP"><span class="toc-number">1.3.</span> <span class="toc-text">地址解析协议ARP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.4.</span> <span class="toc-text">IP数据报的格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%9A%84%E5%9B%BA%E5%AE%9A%E9%83%A8%E5%88%86%EF%BC%8820B%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">IP数据报的固定部分（20B）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E8%B7%AF%E7%94%B1%E8%A1%A8%EF%BC%88Switch%EF%BC%88%EF%BC%89%EF%BC%89"><span class="toc-number">1.6.</span> <span class="toc-text">查找路由表（Switch（））</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91"><span class="toc-number">1.7.</span> <span class="toc-text">划分子网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%88%86%E7%B1%BB%E7%BC%96%E5%9D%80%EF%BC%88CIDR%EF%BC%89-%E5%8F%AF%E5%8F%98%E9%95%BF%E5%BA%A6%EF%BC%8C%E7%BD%91%E7%BB%9C%E5%9F%9F%E9%97%B4%E4%BD%BF%E7%94%A8"><span class="toc-number">1.8.</span> <span class="toc-text">无分类编址（CIDR）[可变长度，网络域间使用]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E9%99%85%E6%8E%A7%E5%88%B6%E6%8A%A5%E6%96%87%E5%8D%8F%E8%AE%AEICMP"><span class="toc-number">1.9.</span> <span class="toc-text">网际控制报文协议ICMP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9"><span class="toc-number">1.10.</span> <span class="toc-text">路由选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AE%EF%BC%88OSPF%EF%BC%89-%E5%8A%A8%E6%80%81"><span class="toc-number">1.11.</span> <span class="toc-text">内部网关协议（OSPF）[动态]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E6%9E%84%E6%88%90"><span class="toc-number">1.12.</span> <span class="toc-text">路由器的构成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6"><span class="toc-number">1.13.</span> <span class="toc-text">IPv6</span></a></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/Internet-network.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Zonuy</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">【知识分享】计算机网络（三）</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-12T08:38:18.000Z" title="发表于 2020-11-12 16:38:18">2020-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-11-13T10:08:17.942Z" title="更新于 2020-11-13 18:08:17">2020-11-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="网络层（NL）"><a href="#网络层（NL）" class="headerlink" title="网络层（NL）"></a>网络层（NL）</h1><h2 id="IP地址表示"><a href="#IP地址表示" class="headerlink" title="IP地址表示"></a>IP地址表示</h2><p>1、IPv4：32bit    分类IP</p>
+<p>​      IPv6：128bit</p>
+<p>2、点分十进制</p>
+<p>​    将32位地址每8位分为一组，再将其转换为十进制，并用“**.**”隔开</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/chp4_sldz.jpg"></p>
+<p>3、特殊IP地址</p>
+<p>​    ①主机号为全0，网络地址</p>
+<p>​    ②主机号为全1，广播地址</p>
+<p>​    ③网络号为全0，本地网络</p>
+<p>​    ④网络号为全1，回传地址（localhost）</p>
+<p>​            127.x.x.x（x的范围0~255）</p>
+<p>​    ⑤专用地址</p>
+<p>​        A：10.0.0.0 ~ 10.255.255.255</p>
+<p>​        B：172.16.0.0 ~ 172.32.255.255</p>
+<p>​        C：192.168.0.0 ~ 192.168.255.255</p>
+<p>4、网络设备作用</p>
+<p>​    物理层：HUB（集线器）</p>
+<p>​    数据链路层：交换机（连接终端设备）</p>
+<p>​    网络层：路由器（连接不同网络）</p>
+<p>​    网络层以上：网关（网络的出口）</p>
+<p>5、网络层提供的两种服务</p>
+<p>​    虚电路：分段占用线路资源，面向连接（可靠）</p>
+<p>​    数据报：面向无连接，不可靠</p>
+<p>​    直接交付：目的IP与发送包的设备IP<strong>在</strong>同一网段</p>
+<p>​    间接交付：目的IP与发送包的设备IP<strong>不在</strong>同一网段</p>
+<p>​    同一网段：两个IP地址的网络地址相同</p>
+<h2 id="IP地址与硬件地址"><a href="#IP地址与硬件地址" class="headerlink" title="IP地址与硬件地址"></a>IP地址与硬件地址</h2><p><strong>物理地址</strong>是数据链路层和物理层使用的地址；<strong>IP地址</strong>是网络层和以上各层使用的地址，是一种逻辑地址</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/chp4_yjdz.jpg"></p>
+<h2 id="地址解析协议ARP"><a href="#地址解析协议ARP" class="headerlink" title="地址解析协议ARP"></a>地址解析协议ARP</h2><p>​            IP → MAC地址    </p>
+<p>​    跳不过路由器，仅能在一个LAN中使用</p>
+<p>*ARP的四种典型情况</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/chp4_ARPsy.jpg"></p>
+<p>​    ①H → H（直接交付）：发送方是主机（如H1），要把IP数据报发送到同一个网络上的另一台主机（如H2）</p>
+<p>​    ②H → R（间接交付）：发送方是主机（如H1），要把IP数据报发送到另一个网络上的一台主机（如H3或H4）</p>
+<p>​    ③R → H（间接交付）：发送方是路由器（如R1），要把IP数据报转发到与R1连接在同一个网络（网2）上的主机（如H3）</p>
+<p>​    ④R → R（直接交付）：发送方是路由器（如R1），要把IP数据报转发到网3上的一台主机（如H4）</p>
+<hr>
+<h2 id="IP数据报的格式"><a href="#IP数据报的格式" class="headerlink" title="IP数据报的格式"></a>IP数据报的格式</h2><p>1、面向无连接</p>
+<p>2、数据头</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/chp4_sjt.jpg"></p>
+<p>​    最大值60字节    最小值20字节</p>
+<p>​    *<strong>必须是4字节的整数倍</strong></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/chp4_zgs.jpg"></p>
+<h2 id="IP数据报的固定部分（20B）"><a href="#IP数据报的固定部分（20B）" class="headerlink" title="IP数据报的固定部分（20B）"></a>IP数据报的固定部分（20B）</h2><p>1、版本：4bit</p>
+<p>2、首部长度（范围5~15）：4bit    </p>
+<p>​             单位：<strong>4字节</strong></p>
+<p>3、总长度：16bit</p>
+<p>​             单位：字节 （H + D）</p>
+<p>​        包中数据部分长度 = 总长度 - 4 * 首部长度</p>
+<p>4、标识：16bit</p>
+<p>​        区分是否为一个报文的包</p>
+<p>5、标志：3bit</p>
+<p>​    MF：是不是最后一片</p>
+<p>​        MF = 1 后面还有分片    MF = 0 是最后一片</p>
+<p>​    DF：允许分片</p>
+<p>​        DF = 0 允许分片    DF = 1 不允许分片</p>
+<p>6、片偏移：13bit    → 排序</p>
+<p>​    较长的分组在分片后，某片在原分组中的相对位置</p>
+<p>​    片偏移以8个字节为偏移单位</p>
+<p>7、生存时间：8bit</p>
+<p>​    通过路由器的个数</p>
+<p>8、协议：8位</p>
+<p>​    指出此数据报携带的数据是使用何种协议</p>
+<p>9、首部检验和：16位</p>
+<p>bit                           1位</p>
+<p>Byte                        8位</p>
+<p>Word（字）           16位</p>
+<p>Dword（双字）     32位</p>
+<h2 id="查找路由表（Switch（））"><a href="#查找路由表（Switch（））" class="headerlink" title="查找路由表（Switch（））"></a>查找路由表（Switch（））</h2><p>①查直接交付（同一网络地址）</p>
+<p>②查特定路由</p>
+<p>③查路由表中有到达网络的路由</p>
+<p>④查默认路由</p>
+<p>⑤丢弃，报错</p>
+<p>在路由表中，每条路由的主要两个信息：（<strong>目的网络地址，下一跳地址</strong>）</p>
+<h2 id="划分子网"><a href="#划分子网" class="headerlink" title="划分子网"></a>划分子网</h2><p>从两级IP地址到三级IP地址</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/chp4_hfzw.jpg"></p>
+<p>子网掩码（32bit，点分十进制）</p>
+<p>​    构成：网络ID、子网ID所占位 置1，主机ID 置0</p>
+<p>​    子网掩码：定长，用在网络内部</p>
+<p>​    例1：IP：211.85.192.226，子网掩码：255.255.255.192</p>
+<p>​            求：网络ID,子网ID，主机ID所占位数；网络地址，广播地址</p>
+<p>​            ①网络ID：24bit    通过IP地址第一个字节求网络ID    </p>
+<p>​                    本题中IP地址第一个字节为211，说明是C类地址，网络号占三个字节，即3 * 8 = 24bit</p>
+<p>​            ②通过子网掩码求网络ID + 子网ID</p>
+<p>​                    因为子网掩码将网络ID和子网ID所占位 <strong>置为1</strong>，本题中的255.255.255.192共有26位为1，则网络ID + 子网ID = 26</p>
+<p>​                    又因为第一问已经算出网络ID为24bit，故子网ID为2bit</p>
+<p>​            ③通过子网掩码求主机ID    子网掩码中<strong>0</strong>的个数</p>
+<p>​                    由于子网掩码共32bit，网络ID和子网ID占26bit，则主机ID为6bit</p>
+<p>​            ④网络地址：IP AND 子网掩码    也就是IP和子网掩码做<strong>“与”</strong>运算</p>
+<p>​                    本题中两者做与运算的结果，也就是网络地址为：211.85.192.192</p>
+<p>​            ⑤广播地址：相应主机位 <strong>置1</strong></p>
+<p>​                    则本题中广播地址为：211.85.192.255</p>
+<p>例2：某单位有4个办公地点，每个地点最多使用30个IP；申请了C类地址：211.85.192.0，试用子网掩码方法划分IP</p>
+<p>​              由题知子网掩码为：255.255.255.224</p>
+<p>​             <img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/chp4_lt2.jpg"></p>
+<p>​               第一个子网：211.85.192.32（网络地址 →001 00000）    </p>
+<p>​                                       211.85.192.33（最小IP → 网络地址 + 1）</p>
+<p>​                                                ……</p>
+<p>​                                       211.85.192.62（最大IP → 广播地址 - 1）</p>
+<p>​                                       211.85.192.63（广播地址    →001 11111）</p>
+<h2 id="无分类编址（CIDR）-可变长度，网络域间使用"><a href="#无分类编址（CIDR）-可变长度，网络域间使用" class="headerlink" title="无分类编址（CIDR）[可变长度，网络域间使用]"></a>无分类编址（CIDR）[可变长度，网络域间使用]</h2><p>1、网络前缀</p>
+<p>​    二级IP（网络号 + 主机号）→ 三级IP（网络号 + 主机号 + 子网号）→ 二级IP（网络前缀 + 主机号）</p>
+<p>​    网络前缀 = 网络号 + 子网号</p>
+<p>2、写法：斜线记法</p>
+<p>​        表示的是地址块</p>
+<p>3、目的：压缩路由表</p>
+<p>​        用一个例子来说明 128.14.32.0 / 20</p>
+<p>​        其子网掩码：255.255.240.0    （/后的数字20就是子网掩码中<strong>“1”</strong>的个数）</p>
+<p>​            地址个数：2^（32-前缀（“1”的个数）） = 2^（32 - 20） = 2^12</p>
+<p>​                注：①域间地址个数不减全0全1</p>
+<p>​                        ②一个C类地址为2^8</p>
+<p>​            最小地址：128.14.0010 0000.00000000</p>
+<p>​            最大地址：128.12.0010 1111.11111111</p>
+<p>​            有多少个C类地址？ 2^（32 - 前缀） / 2^8  = <strong>2^（24 - 前缀）</strong> </p>
+<p>​    *网络前缀越短，其地址块所包含的地址数越多</p>
+<p>​    *查找路由表会得到不止一个结果，从结果中选择网络前缀最长的 —— 最长后缀匹配</p>
+<p>​      换句话说，网络前缀越长，网络越具体</p>
+<p>​    *使用二叉搜索查找路由表</p>
+<hr>
+<h2 id="网际控制报文协议ICMP"><a href="#网际控制报文协议ICMP" class="headerlink" title="网际控制报文协议ICMP"></a>网际控制报文协议ICMP</h2><p>1、基本概念</p>
+<p>​    ①网际层协议</p>
+<p>​    ②ICMP报文放在IP包中</p>
+<p>2、种类</p>
+<p>​            差错报告报文：①终点不可达</p>
+<p>​                                       ②时间超过</p>
+<p>​                                       ③参数问题</p>
+<p>​                                       ④重定向（改变路由）</p>
+<p>​            询问报文：①回送请求和回答报文</p>
+<p>​                               ②时间戳请求和回答报文</p>
+<p>ping用来测试两个主机的连通性</p>
+<h2 id="路由选择"><a href="#路由选择" class="headerlink" title="路由选择"></a>路由选择</h2><p>1、种类：①静态，动态</p>
+<p>​                  ②内部（IGP）、外部（EGP）网关协议</p>
+<p>2、内部网关协议（RIP）[动态]</p>
+<p>​        ①基于距离向量</p>
+<p>​        ②距离：路由器个数（路由器到直接连接的网络的距离为1）</p>
+<p>​        ③最佳路由：距离最短</p>
+<p>​            最大距离：15    （如果是16：不可达）</p>
+<p>3、特点</p>
+<p>​    ①只和相邻路由器交换信息</p>
+<p>​    ②交换完整路由表</p>
+<p>​    ③按固定时间</p>
+<p>​    *好消息传播得快，坏消息传播的慢</p>
+<h2 id="内部网关协议（OSPF）-动态"><a href="#内部网关协议（OSPF）-动态" class="headerlink" title="内部网关协议（OSPF）[动态]"></a>内部网关协议（OSPF）[动态]</h2><p>1、分布式链路状态协议</p>
+<p>​        与带宽成反比</p>
+<p>​        与流量成正比（权值越大）</p>
+<p>2、要点</p>
+<p>​    ①与AS（自治系统）中所有路由器交换信息</p>
+<p>​    ②交换摘要信息</p>
+<p>​    ③链路发生变化，洪泛法传送</p>
+<p>3、区域</p>
+<p>​    把一个A（自治系统）划分更小的范围（可使洪泛法发送范围缩小）</p>
+<p>​    区域号：点分十进制表示（主干区域：连通其他区域）</p>
+<p>4、OSPF实验</p>
+<p>​        ①建立区域</p>
+<p>​        ②把路由器加入到指定区域</p>
+<p>​        *OSPF不用UDP而是直接用IP数据报传送</p>
+<h2 id="路由器的构成"><a href="#路由器的构成" class="headerlink" title="路由器的构成"></a>路由器的构成</h2><p>1、作用：①连接不同网络 ②路由选择</p>
+<p>2、结构：</p>
+<p>​        路由选择部分：路由选择协议 → 路由表 → 转发表</p>
+<p>​        转发部分：I/O端口，交换结构</p>
+<h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><p>1、IPv6地址：128位</p>
+<p>2、地址表示：冒号十六进制</p>
+<p>​        以字（2个字节，16位）为单位，每个字用十六进制表示，字与字之间用冒号分开（共8个字）</p>
+<p>3、地址压缩</p>
+<p>​    ①去除前导0</p>
+<p>​    ②零压缩：用一对冒号来代替一组连续0，仅能使用一次</p>
+<p>​    ③IPv6表示IPv4地址</p>
+<p>​            ::IPv4地址（::点分十进制）</p>
+<hr>
+<p>谢谢你来看我的博客 — Zonuy</p>
+<p>2020年11月13日</p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Zonuy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2020/11/12/%E3%80%90%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB%E3%80%91%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%89%EF%BC%89/">http://example.com/2020/11/12/%E3%80%90%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB%E3%80%91%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%89%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Zonuy</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/Internet-network.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://blog.xxx.com" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechatpay.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://blog.xxx.com" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/alipaypay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2020/11/11/%E3%80%90%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB%E3%80%91%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%BA%8C%EF%BC%89/"><img class="next-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/Internet-network.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【知识分享】计算机网络（二）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/11/10/【知识分享】计算机网络（一）/" title="【知识分享】计算机网络（一）"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/Internet-network.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-10</div><div class="title">【知识分享】计算机网络（一）</div></div></a></div><div><a href="/2020/11/11/【知识分享】计算机网络（二）/" title="【知识分享】计算机网络（二）"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/Internet-network.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-11</div><div class="title">【知识分享】计算机网络（二）</div></div></a></div><div><a href="/2020/11/09/计算机网络概述/" title="【知识分享】计算机网络概述"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/Internet-network.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-09</div><div class="title">【知识分享】计算机网络概述</div></div></a></div></div></div></article></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/gh/ZonuyCode/myhexo@main/img/Internet-network.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2020 By Zonuy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">欢迎来我的博客~</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="69" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script></div></body></html>
